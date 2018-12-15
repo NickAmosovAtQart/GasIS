@@ -20,7 +20,7 @@ public class TestBase {
     static protected String searchEngineURL;
 
     @BeforeClass
-    public static void  globSetup(){
+    public static void  globSetup() {
         File f1 = new File("config.properties");
         FileReader fin = null;
         try {
@@ -35,10 +35,15 @@ public class TestBase {
             e.printStackTrace();
         }
 
-        System.setProperty("webdriver.ie.driver", properties.getProperty("webdriver.ie.driver") );
-        System.setProperty("webdriver.chrome.driver", properties.getProperty("webdriver.chrome.driver"));
 
+        if (System.getProperty("os.name").equals("Mac OS X")) {
+            System.setProperty("webdriver.chrome.driver", properties.getProperty("webdriver.chrome.driver.osx"));
+        } else {
+            System.setProperty("webdriver.chrome.driver", properties.getProperty("webdriver.chrome.driver.win"));
+            System.setProperty("webdriver.ie.driver", properties.getProperty("webdriver.ie.driver"));
+        }
         searchEngineURL = properties.getProperty("searchEngineURL");
+
 // TODO should be refactored
         if (!searchEngineURL.contains("ya.ru")) {
             System.out.println("Now is supported only 'ya.ru' search engine");
@@ -59,9 +64,6 @@ public class TestBase {
                 webDriver = new ChromeDriver();
                 break;
         }
-
-
-
     }
 
     @Parameterized.Parameters
