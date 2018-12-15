@@ -12,7 +12,7 @@ import java.io.*;
 import java.util.*;
 
 @RunWith(value = Parameterized.class )
-public class TestBase {
+public abstract class TestBase {
     protected WebDriver webDriver;
     protected String browser;
 
