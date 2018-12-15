@@ -35,7 +35,6 @@ public class TestBase {
             e.printStackTrace();
         }
 
-
         if (System.getProperty("os.name").equals("Mac OS X")) {
             System.setProperty("webdriver.chrome.driver", properties.getProperty("webdriver.chrome.driver.osx"));
         } else {
